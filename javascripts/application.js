@@ -4,16 +4,19 @@ var Instagram={};
 
  function toScreen(photos){
 
-  // Using jQuery's generic iterator function:
-  // jQuery.each http://api.jquery.com/jQuery.each/
-
   $.each(photos.data, function(index, photo){
 
     // I'll construct the image tag on the fly.
     // The images property contains objects representing images of
     // varying quality. I'll give low_resulution a try.
 
-    photo = "<img src='"+ photo.images.low_resolution.url + "' />";
+    photo = "<div class='photo'" +
+	"<a href='"+photo.link+"' target='_blank'>"+
+	  "<img class='main' src='"+photo.images.low_resolution.url+"'width='250' height='250'/>"+
+	"</a>" +
+	"<img class='avatar' width='40' height='40' src='"+photo.user.profile_picture+"'/>"+
+	"<span class='heart'><strong>"+photo.likes.count+"</string></span>"+
+	"/div";
 
     $('div#photos-wrap').append(photo);
   });
